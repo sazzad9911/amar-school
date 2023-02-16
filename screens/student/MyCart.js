@@ -108,15 +108,15 @@ const MyCart = (props) => {
               justifyContent: "space-between",
             }}
           >
-            <Text>
+            {/* <Text>
               Platform Charge 
             </Text>
-            <Text>:</Text>
+            <Text>:</Text> */}
           </View>
         </View>
         <View> 
-          <Text>৳ {total}</Text>
-          <Text>৳ {(gradTotal-total).toFixed(2)}</Text>
+          <Text>৳ {gradTotal}</Text>
+          {/* <Text>৳ {(gradTotal-total).toFixed(2)}</Text> */}
         </View>
       </View>
       <View style={{height:1,width:'100%',backgroundColor:'#707070',marginVertical:10}}>
@@ -315,7 +315,11 @@ const payment = async (gradTotal,info,navigation) => {
     let GatewayPageURL = apiResponse.GatewayPageURL;
     //res.redirect(GatewayPageURL)
     //setLink(GatewayPageURL);
-    navigation.navigate("PaymentPage", { url: GatewayPageURL,id:id })
+    if(GatewayPageURL){
+      navigation.navigate("PaymentPage", { url: GatewayPageURL,id:id })
+    }else{
+      Alert.alert("Ops!","Url Not Found")
+    }
     console.log("Redirecting to: ", GatewayPageURL);
   });
 };

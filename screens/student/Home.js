@@ -91,7 +91,7 @@ const Home = (props) => {
               headline={doc.title}
               image={doc.image ? `${url}${doc.image}` : null}
               tutor={doc.instructor_id}
-              ratings={doc.status}
+              ratings={5}
               sale={"(10)"}
               price={`${doc.price}`}
             />

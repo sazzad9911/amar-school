@@ -150,7 +150,12 @@ const CourseView = ({navigation,route}) => {
       <Button onPress={()=>{
         //console.log(course.course.id)
        addToCart(userInfo,course.course.id).then(res=>{
-        Alert.alert("Success","Course is successfully added to cart")
+       
+        if(res.data.status!=200){
+          Alert.alert("Ops!",res.data.msg)
+          return
+        }
+        Alert.alert("Success!",res.data.msg)
         if(parseInt(data.price)>0){
           navigation.navigate("MyCart")
         }else{
