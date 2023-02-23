@@ -87,7 +87,7 @@ import Checkout from "../screens/Checkout";
 import { getCategories } from "../apis/courses";
 import { setCategories } from "../functions/categories";
 import PaymentPage from "../screens/PaymentPage";
-
+import * as SplashScreen from 'expo-splash-screen';
 const Stack = createNativeStackNavigator();
 
 const MainRoute = ({ navigation }) => {
@@ -98,10 +98,9 @@ const MainRoute = ({ navigation }) => {
   React.useEffect(() => {
     (async () => {
       let res = await getData("userInfo");
-      if (res) {
-        let data = await getUserInfo(res.meta.token);
-        dispatch(setUserInfo(data.data));
-        //console.log()
+      if(res){
+        dispatch(setUserInfo(res));
+        await SplashScreen.hideAsync();
       }
     })();
   }, []);
@@ -120,7 +119,7 @@ const MainRoute = ({ navigation }) => {
           console.warn(err.response.data.message);
         });
     }
-  }, []);
+  }, [userInfo]);
   return (
     <Stack.Navigator>
       {!userInfo && (
