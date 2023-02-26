@@ -4,6 +4,7 @@ import api from "./api";
 
 export const getStudentCourses = async (userInfo) => {
   const token = userInfo.meta.token;
+  //console.log(`${api}/amarschool/frontend/courses`)
   const res = await axios.get(`${api}/amarschool/frontend/courses`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -374,6 +375,7 @@ export const getStudentBundleCourse = async (userInfo) => {
 };
 export const getStudentBundleCourseDetails = async (userInfo,uuid) => {
   const token = userInfo.meta.token;
+  //console.log(`${api}/amarschool/frontend/bundle-details/${uuid}`)
   const res = await axios.get(`${api}/amarschool/frontend/bundle-details/${uuid}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -439,6 +441,19 @@ export const pay=async(userInfo)=>{
   const res = await axios.post(
     `${api}/amarschool/student/pay`,{
       payment_method:"sslcommarz"
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return res;
+}
+export const applyCoupon=async(userInfo,cardId,coupon_code)=>{
+  const token = userInfo.meta.token;
+  const res = await axios.post(
+    `${api}/amarschool/student/apply-coupon`,{
+      id:cardId,
+      coupon_code:coupon_code
     },
     {
       headers: { Authorization: `Bearer ${token}` },

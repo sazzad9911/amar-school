@@ -3,11 +3,11 @@
     "name": "Amar School",
     "slug": "amar-school",
     "version": "1.0.2",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/newLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/Start.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "plugins": [
@@ -26,25 +26,30 @@
     ],
     "updates": {
       "enabled": false,
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/b02669ff-1ccd-4571-976d-1739ef783b2c"
     },
     "assetBundlePatterns": [
       "assets/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.amar.school"
+      "bundleIdentifier": "com.amar.school",
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
     },
     "android": {
       "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
+        "foregroundImage": "./assets/newLogo.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.amar.school",
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "runtimeVersion": "1.0.2"
     },
     "web": {
       "favicon": "./assets/favicon.png"

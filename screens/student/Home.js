@@ -76,7 +76,7 @@ const Home = (props) => {
       }}
     >
       <Text style={{ fontSize: 20, marginBottom: 10 }}>
-        A Broad Selection Of Courses.
+        Our Latest Courses
       </Text>
 
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -94,6 +94,7 @@ const Home = (props) => {
               ratings={5}
               sale={"(10)"}
               price={`${doc.price}`}
+              data={doc}
             />
           ))}
           {broadSelection&&broadSelection.length==0&&(
@@ -134,11 +135,11 @@ const Home = (props) => {
           </Text>
         )}
       </ScrollView>
-      <InstructorLoginCart {...props} />
-      <Text style={{ fontSize: 20, marginBottom: 10 }}>
+      
+      {/* <Text style={{ fontSize: 20, marginBottom: 10 }}>
         One to one consultation
-      </Text>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      </Text> */}
+      {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {consultation ? (
           consultation.map((doc, i) => (
             <InstructorCart
@@ -164,8 +165,8 @@ const Home = (props) => {
             No Instructor
           </Text>
         )}
-      </ScrollView>
-      <Text style={{ fontSize: 20, marginBottom: 10 }}>
+      </ScrollView> */}
+      <Text style={{ fontSize: 20, marginBottom: 10,marginTop:10 }}>
         Top Rated Courses From Our Top Instructor.
       </Text>
 
@@ -177,7 +178,7 @@ const Home = (props) => {
               {...props}
               name={doc.first_name + " " + doc.last_name}
               job={doc.professional_title}
-              level={doc.status}
+              level={5}
               rate={doc.hourly_rate}
               slug={doc.slug}
               user_id={doc.user_id}

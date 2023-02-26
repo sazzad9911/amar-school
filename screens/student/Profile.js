@@ -27,6 +27,7 @@ import {
   share,
   cart,
   myCart,
+  instructors
 } from "../../assets/icon";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../../functions/userInfo";
@@ -35,6 +36,10 @@ import { getStudentProfile, updateStudentProfilePicture } from "../../apis/profi
 import * as ImagePicker from "expo-image-picker";
 import { pickDocument } from "../Teacher/AddResource";
 import { url } from "../../apis/api";
+import InstructorLoginCart from "../../components/main/InstructorLoginCart";
+import { getInstructorProfile } from "../../apis/instructor";
+import { setInstructorInfo } from "../../functions/instrcutorInfo";
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const Profile = (props) => {
   const dispatch = useDispatch();
@@ -193,6 +198,39 @@ const Profile = (props) => {
           image={book1}
           icon={<AntDesign name="right" size={24} color="black" />}
         />
+        <SelectClass
+        leftIcon={<FontAwesome5 name="chalkboard-teacher" size={24} color="orange" />}
+          onPress={() => {
+            if (userInfo && userInfo.data.role == 3) {
+              props.navigation.navigate("TeacherInfo");
+              return;
+            }
+            //props.navigation.navigate("TeacherInfo");
+            getInstructorProfile(userInfo)
+              .then((res) => {
+                dispatch(setInstructorInfo(res.data.data));
+              })
+              .catch((err) => {
+                Alert.alert("Ops!", err.response.data.message);
+              });
+          }}
+          style={{
+            height: 150,
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "green",
+            borderTopLeftRadius: 30,
+            marginBottom: 10,
+            borderBottomRightRadius: 30,
+            marginBottom: 10,
+          }}
+          title={userInfo?.data.role==3?"Apply as Instructor":"LogIn as Instructor"}
+          color="#fff"
+          image={instructors}
+          icon={<AntDesign name="right" size={24} color="black" />}
+        />
+        {/* <InstructorLoginCart {...props} /> */}
         {/* <SelectClass
           onPress={() => {
             props.navigation.navigate("Consultation");

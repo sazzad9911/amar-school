@@ -35,12 +35,15 @@ const CourseListNav = ({navigation,route}) => {
           justifyContent: "space-between",
           width: "100%",
           flexWrap:"wrap",
+          height:"100%"
         }}
       >
         
         {courses &&
           courses.map((doc, i) => (
             <CourseCart
+
+            hidden={true}
               key={i}
               onPress={() => {
                 //console.log(doc.image)
@@ -49,7 +52,7 @@ const CourseListNav = ({navigation,route}) => {
               headline={doc.title}
               image={doc.image ? `${url}${doc.image}` : null}
               tutor={doc.instructor_id}
-              ratings={doc.status}
+              ratings={5}
               sale={"(10)"}
               price={`BDT ${doc.price}`}
             />
@@ -60,11 +63,9 @@ const CourseListNav = ({navigation,route}) => {
               textAlign:"center"
             }}>No Course Found</Text>
           )}
+          
       </View>
-     
-      <View style={{height:30}}>
-
-      </View>
+      <View style={{height:40}}/>
     </ScrollView>
   );
 };

@@ -22,8 +22,7 @@ const CourseBundle = ({
       style={{
         width: 150,
         backgroundColor: "#fff",
-        borderTopLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        borderRadius:5,
         flexDirection: "row",
         marginBottom: 10,
         marginRight: 10,
@@ -33,16 +32,17 @@ const CourseBundle = ({
       <View>
         <Image
           style={{
-            height: 70,
+            height: 100,
             width: 150,
+            resizeMode:"stretch"
           }}
           source={{
             uri: image,
           }}
         />
         <View style={{ width: 150, padding: 5 }}>
-          <Text style={{ fontSize: 13, fontWeight: "500" }}>{headline}</Text>
-          <Text style={{ fontSize: 11 }}>{tutior}</Text>
+          <Text numberOfLines={2} style={{ fontSize: 13, fontWeight: "500" }}>{headline}</Text>
+          <Text numberOfLines={2} style={{ fontSize: 11 }}>{tutior}</Text>
           {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={{ fontSize: 12, marginRight: 10 }}>{ratings}</Text>
             <Entypo name="star" size={12} color="#FFC300" />
@@ -56,10 +56,10 @@ const CourseBundle = ({
             <Text style={{ fontSize: 12, fontWeight: "500" }}>Price:</Text>
             <Text
               style={{
-                fontSize: 12,
+                fontSize: 16,
                 color: "#53B5E0",
                 marginLeft: 5,
-                fontWeight: "500",
+                fontWeight: "900",
               }}
             >
               {parseInt(courses)>0?`${courses}৳`:'Free'}

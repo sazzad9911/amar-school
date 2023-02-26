@@ -5,7 +5,7 @@ import { SvgXml } from 'react-native-svg';
 
 
 const SelectClass = ({
-title,onPress,image,icon,color
+title,onPress,image,icon,color,leftIcon
 }) =>{
     return (
         <TouchableOpacity onPress={onPress} style={{height:65,
@@ -21,13 +21,16 @@ title,onPress,image,icon,color
             height:45,
             width:45,
             borderRadius:10,
-            flex:1.5,
-            overflow:'hidden'
+            flex:1,
+            overflow:'hidden',
+            justifyContent:"center",
+            alignItems:"center"
             }}>
-           <SvgXml xml={image} height="45" width="45" />
+           {!leftIcon&&(<SvgXml xml={image} height="45" width="45" />)}
+           {leftIcon}
                 
             </View>
-            <Text style={{fontSize:20,flex:5,marginLeft:10}}>
+            <Text style={{fontSize:18,flex:5,marginLeft:10}}>
                 {title}
             </Text>
             <View style={{flex:1}} >

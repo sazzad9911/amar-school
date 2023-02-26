@@ -132,7 +132,7 @@ const InstructorCart = ({ name, job, navigation, level, rate,slug,image,user_id 
           }}
         />
       </View>
-      <Text style={{ marginTop: 5 }}>{rate?rate:"N/A"}/Hour</Text>
+      {/* <Text style={{ marginTop: 5 }}>{rate?rate:"N/A"}/Hour</Text> */}
     </TouchableOpacity>
   );
 };
