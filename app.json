@@ -5,11 +5,7 @@
     "version": "1.0.2",
     "icon": "./assets/newLogo.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/Start.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
-    },
+    
     "plugins": [
       [
         "expo-image-picker",
@@ -40,7 +36,7 @@
       }
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/newLogo.png",
         "backgroundColor": "#FFFFFF"
@@ -49,7 +45,7 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "runtimeVersion": "1.0.2"
+      "runtimeVersion": "1.0.3"
     },
     "web": {
       "favicon": "./assets/favicon.png"

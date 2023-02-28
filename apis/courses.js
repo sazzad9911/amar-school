@@ -461,3 +461,13 @@ export const applyCoupon=async(userInfo,cardId,coupon_code)=>{
   );
   return res;
 }
+export const getBundleCourseDetails=async(userInfo,bundleId)=>{
+  const token = userInfo.meta.token;
+  const res = await axios.get(
+    `${api}/amarschool/frontend/bundle_course/${bundleId}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return res;
+}
