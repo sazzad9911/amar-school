@@ -40,7 +40,6 @@ const BundleDetails = ({ navigation, route }) => {
   const [instructorDetails, setInstructorDetails] = useState();
 
   useEffect(() => {
-    // console.log()
     if (userInfo) {
       getStudentBundleCourseDetails(userInfo, data.uuid)
         .then((res) => {
@@ -181,7 +180,10 @@ const BundleDetails = ({ navigation, route }) => {
           {/* <Tab.Screen name="Overview" component={Overview} /> */}
           {/* <Tab.Screen name="Curriculam" component={Resources} /> */}
           {/* <Tab.Screen name="Discussion" component={DiscussionTab} /> */}
-          <Tab.Screen name="Course List" component={CourseListNav} />
+          <Tab.Screen name="Course List"
+           initialParams={{
+              data: data,
+            }} component={CourseListNav} />
           <Tab.Screen
             name="Instructor"
             initialParams={{

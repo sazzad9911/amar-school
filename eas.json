@@ -17,8 +17,11 @@
       }
     },
     "production": {
-      "ios": {
-        "resourceClass": "m1-medium"
+      "extends": "development",
+      "distribution": "store",
+      "developmentClient": false,
+      "android": {
+        "buildType": "apk"
       }
     }
   },

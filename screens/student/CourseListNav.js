@@ -3,20 +3,20 @@ import React, { useEffect, useState } from "react";
 import CourseCart from "../../components/Others/CourseCart";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
-import { getStudentCourses } from "../../apis/courses";
+import { getBundleCourseDetails, getStudentCourses } from "../../apis/courses";
 import { url } from "../../apis/api";
 
 const CourseListNav = ({navigation,route}) => {
   const [courses,setCourses]=useState()
   const userInfo=useSelector(state=>state.userInfo)
-
+  const data=route.params?.data;
   useEffect(()=>{
-    if(userInfo){
-      getStudentCourses(userInfo)
+    if(userInfo &&data){
+      getBundleCourseDetails(userInfo,data.id)
         .then((res) => {
           //setData(res.data.data);
           //setCategories(res.data.data.categories);
-          setCourses(res.data.data.courses.data);
+          setCourses(res.data.data);
           //setLoader(false);
         })
         .catch((err) => {

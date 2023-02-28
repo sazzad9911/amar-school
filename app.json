@@ -5,7 +5,11 @@
     "version": "1.0.2",
     "icon": "./assets/newLogo.png",
     "userInterfaceStyle": "light",
-    
+    "splash": {
+      "image": "./assets/Start.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
     "plugins": [
       [
         "expo-image-picker",
@@ -20,11 +24,7 @@
         }
       ]
     ],
-    "updates": {
-      "enabled": false,
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/b02669ff-1ccd-4571-976d-1739ef783b2c"
-    },
+   
     "assetBundlePatterns": [
       "assets/*"
     ],
@@ -45,7 +45,9 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "runtimeVersion": "1.0.3"
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
