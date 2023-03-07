@@ -24,7 +24,6 @@
         }
       ]
     ],
-   
     "assetBundlePatterns": [
       "assets/*"
     ],
@@ -57,6 +56,9 @@
         "projectId": "b02669ff-1ccd-4571-976d-1739ef783b2c"
       }
     },
-    "owner": "scientistx_technology"
+    "owner": "scientistx_technology",
+    "updates": {
+      "url": "https://u.expo.dev/b02669ff-1ccd-4571-976d-1739ef783b2c"
+    }
   }
 }

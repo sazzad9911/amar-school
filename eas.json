@@ -19,10 +19,7 @@
     "production": {
       "extends": "development",
       "distribution": "store",
-      "developmentClient": false,
-      "android": {
-        "buildType": "apk"
-      }
+      "developmentClient": false
     }
   },
   "submit": {

@@ -10,13 +10,6 @@ import {
 import MainRoute from "./routers/MainRoute";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { usePreventScreenCapture } from "expo-screen-capture";
-import TeacherRoute from "./routers/TeacherRoute";
-import Button from "./components/main/Button";
-import {
-  getAllInstructor,
-  getInstructorDetails,
-} from "./apis/Instractor/allInstractor";
-import Animated, { FadeIn, FadeInLeft } from "react-native-reanimated";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider, useSelector } from "react-redux";
@@ -73,48 +66,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-const InitialScreen = ({ navigation, route }) => {
-  return (
-    <Animated.View
-      entiring={FadeIn}
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Button
-        style={{
-          backgroundColor: "#FF0000",
-          height: 55,
-          color: "#fff",
-          fontWeight: "900",
-          fontSize: 18,
-          borderRadius: 20,
-          width: 320,
-        }}
-        title={"Instructor"}
-        onPress={() => {
-          //setCheck("teacher")
-          navigation.navigate("TeacherRoute");
-        }}
-      />
-      <Button
-        style={{
-          backgroundColor: "#006600",
-          height: 55,
-          color: "#fff",
-          fontWeight: "900",
-          fontSize: 18,
-          borderRadius: 20,
-          width: 320,
-        }}
-        title={"Student"}
-        onPress={() => {
-          //setCheck("student")
-          navigation.navigate("MainRoute");
-        }}
-      />
-    </Animated.View>
-  );
-};
