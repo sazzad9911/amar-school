@@ -8,6 +8,7 @@ import Profile from "./../screens/student/Profile";
 import UserBottomBar from "./../components/bottomBars/UserBottomBar";
 import UserHomeHeader from "./../components/headers/UserHomeHeader";
 import Courses from "../screens/Courses";
+import MyLearning from "../screens/student/MyLearning";
 const Tab = createBottomTabNavigator();
 
 const UserTabRoute = () => {
@@ -21,13 +22,13 @@ const UserTabRoute = () => {
       <Tab.Screen
         options={{ header: (props) => <UserHomeHeader {...props} /> }}
         name="Courses"
-        component={Courses}
+        component={MyLearning}
       />
       <Tab.Screen
         options={{ header: (props) => <UserHomeHeader {...props} /> }}
         name="Notification"
         component={Notification}
-      />
+      />  
       <Tab.Screen
         options={{ headerShown: false }}
         name="Profile"

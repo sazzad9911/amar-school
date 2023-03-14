@@ -14,79 +14,85 @@ const MyLearningCart = ({
   onPress,
 }) => {
   return (
-    <View
-      style={{
-        backgroundColor: "#FFFDD0",
-        padding: 10,
-        borderRadius: 10,
-        marginBottom: 20,
+    <TouchableOpacity
+      onPress={() => {
+        if (onPress) {
+          onPress();
+        }
       }}>
-      <View style={{ flexDirection: "row", backgroundColor: "#FFFDD0" }}>
-        <Image
-          style={{
-            height: 120,
-            width: "30%",
-            borderRadius: 10,
-          }}
-          source={{ uri: image }}
-        />
-        <View style={{ width: "70%", paddingHorizontal: 10 }}>
-          <Text
-            numberOfLines={2}
+      <View
+        style={{
+          backgroundColor: "#FFFDD0",
+          padding: 10,
+          borderRadius: 5,
+          marginBottom: 20,
+        }}>
+        <View style={{ flexDirection: "row", backgroundColor: "#FFFDD0" }}>
+          <Image
             style={{
-              fontSize: 15,
-              fontWeight: "500",
-              textAlign: "justify",
-              width: "100%",
-              marginVertical: 5,
-            }}>
-            {topics}
-          </Text>
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Entypo name="star" size={16} color="#F6CE05" />
-              <Text>Give Review</Text>
-            </View>
-            <View
+              height: 120,
+              width: "30%",
+              borderRadius: 5,
+            }}
+            source={{ uri: image }}
+          />
+          <View style={{ width: "70%", paddingHorizontal: 10 }}>
+            <Text
+              numberOfLines={2}
               style={{
-                flexDirection: "row",
-                marginLeft: 20,
-                alignItems: "center",
+                fontSize: 15,
+                fontWeight: "500",
+                textAlign: "justify",
+                width: "100%",
+                marginVertical: 5,
               }}>
-              <FontAwesome5
-                style={{ marginRight: 5 }}
-                name="file-invoice"
-                size={12}
-                color="black"
-              />
-              <Text>Invoice</Text>
+              {topics}
+            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Entypo name="star" size={16} color="#F6CE05" />
+                <Text>Give Review</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginLeft: 20,
+                  alignItems: "center",
+                }}>
+                <FontAwesome5
+                  style={{ marginRight: 5 }}
+                  name="file-invoice"
+                  size={12}
+                  color="black"
+                />
+                <Text>Invoice</Text>
+              </View>
             </View>
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ marginRight: 10 }}>
-              <Text>Price</Text>
-              <Text>Order ID</Text>
-              <Text>Validity</Text>
-            </View>
-            <View>
-              <Text>
-                :{" "}
-                <Text style={{ marginLeft: 5 }}>
-                  {parseInt(price) > 0 ? `${price}৳` : "Free"}
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ marginRight: 10 }}>
+                <Text>Price</Text>
+                <Text>Order ID</Text>
+                <Text>Validity</Text>
+              </View>
+              <View>
+                <Text>
+                  :{" "}
+                  <Text style={{ marginLeft: 5 }}>
+                    {parseInt(price) > 0 ? `${price}৳` : "Free"}
+                  </Text>
                 </Text>
-              </Text>
-              <Text>
-                : <Text style={{ marginLeft: 5 }}>{order}</Text>
-              </Text>
-              <Text>
-                : <Text style={{ marginLeft: 5 }}>{validation}</Text>
-              </Text>
+                <Text>
+                  : <Text style={{ marginLeft: 5 }}>{order}</Text>
+                </Text>
+                <Text>
+                  : <Text style={{ marginLeft: 5 }}>{validation}</Text>
+                </Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        {/* <View style={{ width: "80%" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          {/* <View style={{ width: "80%" }}>
           <Text>70% </Text>
           <View
             style={{
@@ -105,22 +111,20 @@ const MyLearningCart = ({
               }}></View>
           </View>
         </View> */}
-        <Button
-          onPress={() => {
-            if (onPress) {
-              onPress();
-            }
-          }}
+          {/* <Button
+          
           style={{
             width: 50,
             height: 30,
             backgroundColor: "#006600",
             color: "#fff",
+            marginTop:20
           }}
           title={"View"}
-        />
+        /> */}
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

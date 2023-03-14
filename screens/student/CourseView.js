@@ -80,6 +80,7 @@ const CourseView = ({navigation,route}) => {
       <View style={art.container}>
        {course.course.video?(
          <Video
+         shouldPlay={true}
          ref={video} 
          style={art.video}
          source={{

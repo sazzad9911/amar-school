@@ -96,6 +96,7 @@ const CourseDetails = ({ navigation, route }) => {
       <View style={art.container}>
         {videoUrl ? (
           <Video
+            shouldPlay={true}
             ref={video}
             style={art.video}
             source={{

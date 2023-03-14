@@ -19,7 +19,8 @@ const MyLearning = (props) => {
     if(userInfo){
       setLoader(true)
       getMyLearning(userInfo.meta.token).then(res=>{
-        setData(res.data.data.orderItems.data)
+        let arr=res.data.data.orderItems.data.filter(d=>d.course!=null)
+        setData(arr)
         //console.log(res.data.data.orderItems.data[0])
         setLoader(false)
       }).catch(err=>{
@@ -27,7 +28,7 @@ const MyLearning = (props) => {
         console.warn(err.response.data)
       })
     }
-  },[userInfo,isFocused])
+  },[isFocused])
   if(Loader){
     return <ActivityLoader/>
   }
