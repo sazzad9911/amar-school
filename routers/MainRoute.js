@@ -97,10 +97,11 @@ const MainRoute = ({ navigation }) => {
 
   React.useEffect(() => {
     (async () => {
+      await SplashScreen.hideAsync();
       let res = await getData("userInfo");
       if(res){
         dispatch(setUserInfo(res));
-        await SplashScreen.hideAsync();
+        
       }
     })();
   }, []);
@@ -119,7 +120,7 @@ const MainRoute = ({ navigation }) => {
           console.warn(err.response.data.message);
         });
     }
-  }, [userInfo]);
+  }, []);
   return (
     <Stack.Navigator>
       {!userInfo && (

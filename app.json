@@ -2,7 +2,7 @@
   "expo": {
     "name": "Amar School",
     "slug": "amar-school",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "icon": "./assets/newLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -35,7 +35,7 @@
       }
     },
     "android": {
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/newLogo.png",
         "backgroundColor": "#FFFFFF"
