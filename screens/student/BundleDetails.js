@@ -61,12 +61,13 @@ const BundleDetails = ({ navigation, route }) => {
           alignItems: "center",
         }}>
         {course && course.bundle.image ? (
-          <Image
+          <Image 
             ref={video}
-            style={art.video}
+            style={[art.video]}
             source={{
               uri: `${url}${course?.bundle.image}`,
             }}
+            
             useNativeControls
             resizeMode="contain"
             isLooping
@@ -82,7 +83,7 @@ const BundleDetails = ({ navigation, route }) => {
           alignItems: "center",
           justifyContent: "space-between",
         }}>
-        <Text style={{ fontSize: 20, fontWeight: "500" }}>
+        <Text style={{ fontSize: 20, fontWeight: "500",marginTop:10 }}>
           BDT {course?.bundle.price}
         </Text>
       </View>
@@ -92,7 +93,7 @@ const BundleDetails = ({ navigation, route }) => {
           justifyContent: "space-between",
           marginTop: 10,
         }}>
-        <View style={{ flexDirection: "row" }}>
+        {/* <View style={{ flexDirection: "row" }}>
           <View style={{ marginRight: 10 }}>
             <Feather
               style={{ marginTop: 3 }}
@@ -111,11 +112,11 @@ const BundleDetails = ({ navigation, route }) => {
             <Text>Course Level</Text>
             <Text>Student Enrolled</Text>
           </View>
-        </View>
-        <View>
+        </View> */}
+        {/* <View>
           <Text>{course?.total_students}</Text>
           <Text>{course?.instructor_average_rating}</Text>
-        </View>
+        </View> */}
       </View>
       <Button
         onPress={() => {
@@ -208,6 +209,7 @@ const art = StyleSheet.create({
   video: {
     height: 200,
     width: "100%",
+    
   },
   buttons: {
     height: 30,
