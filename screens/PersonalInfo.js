@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -10,7 +10,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert
+  Alert,
 } from "react-native";
 import Button from "../components/main/Button";
 import { SvgXml } from "react-native-svg";
@@ -18,8 +18,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { student1, profile, pen } from "../assets/icon";
 import { StatusBar } from "expo-status-bar";
 import CheckBox from "../components/CheckBox";
-import {userRegistration} from "../apis/auth"
-import ActivityLoader from "../components/ActivityLoader"
+import { logInUser, registerUser, userRegistration } from "../apis/auth";
+import ActivityLoader from "../components/ActivityLoader";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../functions/userInfo";
 import { storeData } from "../functions/storage";
@@ -32,10 +32,12 @@ function PersonalInfo(props) {
   const [SecondName, setSecondName] = React.useState();
   const [Password, setPassword] = React.useState();
   const [Checked, setChecked] = React.useState();
-  const params=props.route.params;
-  const PhoneNumber=params.PhoneNumber;
-  const [Loader,setLoader]=React.useState(false)
-  const dispatch=useDispatch()
+  const params = props.route.params;
+  const PhoneNumber = params.PhoneNumber;
+  const [Loader, setLoader] = React.useState(false);
+  const dispatch = useDispatch();
+  const [Email,setEmail]=useState()
+  //console.log(PhoneNumber)
 
   React.useEffect(() => {
     if (props.visible) {
@@ -113,18 +115,14 @@ function PersonalInfo(props) {
       justifyContent: "center",
     },
   });
-if(Loader){
-    return(
-        <ActivityLoader/>
-    )
-}
+  if (Loader) {
+    return <ActivityLoader />;
+  }
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : null}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
-    >
-    
+      keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}>
       <View style={{ paddingHorizontal: 20 }}>
         <Text style={{ marginTop: 10 }}>First Name</Text>
         <View
@@ -137,17 +135,15 @@ if(Loader){
             justifyContent: "center",
             paddingHorizontal: 10,
             marginTop: 10,
-          }}
-        >
-          <TextInput
+          }}>
+          <TextInput value={FirstName}
             onChangeText={setFirstName}
             style={{
               color: "black",
               fontSize: 18,
               height: 55,
             }}
-            placeholder="Enter your first name"
-          ></TextInput>
+            placeholder="Enter your first name"></TextInput>
         </View>
         <Text style={{ marginTop: 10 }}>Last Name</Text>
         <View
@@ -160,17 +156,36 @@ if(Loader){
             justifyContent: "center",
             paddingHorizontal: 10,
             marginTop: 10,
-          }}
-        >
-          <TextInput
+          }}>
+          <TextInput value={SecondName}
             onChangeText={setSecondName}
             style={{
               color: "black",
               fontSize: 18,
               height: 55,
             }}
-            placeholder="Enter your last name"
-          ></TextInput>
+            placeholder="Enter your last name"></TextInput>
+        </View>
+        <Text style={{ marginTop: 10 }}>Email (Optional)</Text>
+        <View
+          style={{
+            height: 45,
+            width: "100%",
+            borderWidth: 1,
+            borderColor: "#808080",
+            borderRadius: 10,
+            justifyContent: "center",
+            paddingHorizontal: 10,
+            marginTop: 10,
+          }}>
+          <TextInput value={Email}
+            onChangeText={setEmail}
+            style={{
+              color: "black",
+              fontSize: 18,
+              height: 55,
+            }}
+            placeholder="Enter your email"></TextInput>
         </View>
         <Text style={{ marginTop: 10 }}>Password</Text>
         <View
@@ -183,17 +198,15 @@ if(Loader){
             justifyContent: "center",
             paddingHorizontal: 10,
             marginTop: 10,
-          }}
-        >
-          <TextInput
+          }}>
+          <TextInput value={Password}
             onChangeText={setPassword}
             style={{
               color: "black",
               fontSize: 18,
               height: 55,
             }}
-            placeholder="Enter  Password"
-          ></TextInput>
+            placeholder="Enter  Password"></TextInput>
         </View>
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <CheckBox
@@ -210,17 +223,28 @@ if(Loader){
               Alert.alert("Ops!", "All fields are required.");
               return;
             }
-            setLoader(true)
-            userRegistration(FirstName,SecondName,Password,PhoneNumber,Password)
-            .then(res=>{
+            setLoader(true);
+            registerUser(FirstName, SecondName, Password, PhoneNumber, Email)
+              .then((res) => {
+                logInUser(PhoneNumber, Password).then((res) => {
+                  dispatch(setUserInfo(res.data));
+                  storeData("userInfo", res.data);
+                  props.navigation.navigate("UserTabRoute");
+                });
+              })
+              .catch((e) => {
                 setLoader(false)
-                console.log(res.data)
-                props.navigation.navigate("OTP",{PhoneNumber:PhoneNumber,Password:Password});
-            }).catch(err=>{
-                setLoader(false)
-                Alert.alert("Ops!",err.response.data.message)
-            })
-            
+                Alert.alert(e.response.data.message);
+              });
+            // userRegistration(FirstName,SecondName,Password,PhoneNumber,Password)
+            // .then(res=>{
+            //     setLoader(false)
+            //     console.log(res.data)
+            //     props.navigation.navigate("OTP",{PhoneNumber:PhoneNumber,Password:Password});
+            // }).catch(err=>{
+            //     setLoader(false)
+            //     Alert.alert("Ops!",err.response.data.message)
+            // })
           }}
           title={"Submit"}
           style={{
@@ -232,8 +256,7 @@ if(Loader){
             fontSize: 22,
             width: "100%",
             marginTop: 30,
-          }}
-        >
+          }}>
           {" "}
         </Button>
       </View>

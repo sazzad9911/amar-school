@@ -8,18 +8,27 @@
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium"
-      }
+      },
+      "channel": "master"
     },
     "preview": {
       "distribution": "internal",
       "ios": {
         "resourceClass": "m1-medium"
-      }
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "channel": "master"
     },
     "production": {
       "extends": "development",
       "distribution": "store",
-      "developmentClient": false
+      "developmentClient": false,
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      },
+      "channel": "master"
     }
   },
   "submit": {

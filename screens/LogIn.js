@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -18,19 +18,19 @@ import { logInUser } from "../apis/auth";
 import Button from "../components/main/Button";
 import { storeData } from "../functions/storage";
 import { setUserInfo } from "../functions/userInfo";
+import { Feather } from "@expo/vector-icons";
 
-
-function LogIn({navigation}) {
+function LogIn({ navigation }) {
   const [PhoneNumber, setPhoneNumber] = React.useState();
   const [Password, setPassword] = React.useState();
   const dispatch = useDispatch();
-  
+  const [p, setP] = useState(false);
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : null}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
-    >
+      keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}>
       <SafeAreaView
         style={{
           padding: 20,
@@ -38,8 +38,7 @@ function LogIn({navigation}) {
           flex: 1,
           alignItems: "center",
           height: "100%",
-        }}
-      >
+        }}>
         <StatusBar backgroundColor="#fff" />
 
         <View style={{ paddingHorizontal: 30 }}>
@@ -49,8 +48,7 @@ function LogIn({navigation}) {
               fontSize: 18,
               fontWeight: "600",
               color: "#6F7071",
-            }}
-          >
+            }}>
             Phone Number
           </Text>
           <View style={art.numInput}>
@@ -70,55 +68,75 @@ function LogIn({navigation}) {
                 fontSize: 30,
                 marginBottom: 5,
                 fontWeight: "100",
-              }}
-            >
+              }}>
               |
             </Text>
-            <TextInput placeholder="Enter Phone Number" onChangeText={setPhoneNumber}
-            value={PhoneNumber}
-            keyboardType="number-pad" style={{
-              flex:1
-            }}/>
+            <TextInput
+              placeholder="Enter Phone Number"
+              onChangeText={setPhoneNumber}
+              value={PhoneNumber}
+              keyboardType="number-pad"
+              style={{
+                flex: 1,
+              }}
+            />
           </View>
 
-          <Text 
+          <Text
             style={{
               marginTop: 20,
               fontSize: 18,
               fontWeight: "600",
               color: "#6F7071",
               marginBottom: 10,
-            }}
-          >
+            }}>
             Password
           </Text>
-          <TextInput value={Password}
-            onChangeText={setPassword}
-            secureTextEntry={true}
+          <View
             style={{
-              color: "black",
-              width: 310,
-              height: 55,
-              backgroundColor: "#FFFDD0",
-              borderRadius: 20,
-              paddingHorizontal: 20,
-            }}
-            placeholder="Enter password"
-          />
+              justifyContent: "center",
+            }}>
+            <TextInput
+              value={Password}
+              onChangeText={setPassword}
+              secureTextEntry={!p}
+              style={{
+                color: "black",
+                width: 310,
+                height: 55,
+                backgroundColor: "#FFFDD0",
+                borderRadius: 20,
+                paddingHorizontal: 20,
+              }}
+              placeholder="Enter password"
+            />
+            <View
+              style={{
+                position: "absolute",
+                right: 10,
+                zIndex: 100,
+              }}>
+              <TouchableOpacity onPress={() => setP((v) => !v)}>
+                {p ? (
+                  <Feather name="eye" size={24} color="black" />
+                ) : (
+                  <Feather name="eye-off" size={24} color="black" />
+                )}
+              </TouchableOpacity>
+            </View>
+          </View>
           <TouchableOpacity
             style={{ justifyContent: "flex-start", marginTop: 10 }}
             onPress={() => {
               navigation.navigate("ForgetPass");
-            }}
-          >
+            }}>
             <Text
               style={{
                 textAlign: "left",
                 fontSize: 15,
                 fontWeight: "500",
                 color: "green",
-              }}
-            >
+              }}>
               Forget Password?
             </Text>
           </TouchableOpacity>
@@ -131,8 +149,7 @@ function LogIn({navigation}) {
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Button
             onPress={() => {
               if (!PhoneNumber || !Password) {
@@ -161,22 +178,19 @@ function LogIn({navigation}) {
               fontWeight: "bold",
               borderRadius: 20,
               width: "90%",
-            }}
-          >
+            }}>
             {" "}
           </Button>
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate("PhoneNumber");
-            }}
-          >
+            }}>
             <Text
               style={{
                 fontSize: 16,
                 color: "green",
                 fontWeight: "600",
-              }}
-            >
+              }}>
               Create A New Account?
             </Text>
           </TouchableOpacity>

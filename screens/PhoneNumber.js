@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -12,11 +12,17 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import { resentOTP } from "../apis/auth";
+import { resentOTP, sendOTP } from "../apis/auth";
+import ActivityLoader from "../components/ActivityLoader";
 import Button from "../components/main/Button";
 
 function PhoneNumber(props) {
   const [PhoneNumber, setPhoneNumber] = React.useState();
+  const [loader,setLoader]=useState(false)
+
+  if(loader){
+    return<ActivityLoader/>
+  }
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -66,7 +72,7 @@ function PhoneNumber(props) {
             >
               |
             </Text>
-            <TextInput onChangeText={setPhoneNumber}
+            <TextInput value={PhoneNumber} onChangeText={setPhoneNumber}
               keyboardType="number-pad"
               style={{
                 color: "black",
@@ -88,13 +94,24 @@ function PhoneNumber(props) {
               Alert.alert("Invalid Phone Number")
               return
             }
-            props.navigation.navigate("PersonalInfo",{PhoneNumber:PhoneNumber});
-            return
-            resentOTP(PhoneNumber).then(res=>{
-                props.navigation.navigate("OTP",{PhoneNumber:`${PhoneNumber}`});
-            }).catch(err=>{
-               Alert.alert("Ops!",err.response.data.message)
+            var OTP = Math.floor(1000 + Math.random() * 9000);
+            setLoader(true)
+            console.log(OTP)
+            sendOTP(PhoneNumber,OTP).then(res=>{
+              setLoader(false)
+              props.navigation.navigate("OTP",{PhoneNumber:PhoneNumber,otp:OTP});
+            }).catch(e=>{
+              setLoader(false)
+              Alert.alert("Ops!",e.response.data.message)
             })
+            
+            // props.navigation.navigate("PersonalInfo",{PhoneNumber:PhoneNumber});
+            // return
+            // resentOTP(PhoneNumber).then(res=>{
+            //     props.navigation.navigate("OTP",{PhoneNumber:`${PhoneNumber}`});
+            // }).catch(err=>{
+            //    Alert.alert("Ops!",err.response.data.message)
+            // })
             //props.navigation.navigate("OTP",{PhoneNumber:`+880${PhoneNumber}`});
           }}
           title={"Go ahead"}

@@ -11,6 +11,10 @@ export const userRegistration=async(firstName,lastName,password,phoneNumber,pass
     })
     return res
 }
+export const registerUser=async(firstName,lastName,password,phoneNumber,email)=>{
+    const res=await axios.post(`${api}/amarschool/frontend/mobile-register?first_name=${firstName}&last_name=${lastName}&phone_number=${phoneNumber}&password=${password}&email=${email}`)
+    return res
+}
 export const verifyOTP=async(phoneNumber,OTP)=>{
     const res=await axios.post(`${api}/amarschool/frontend/user-otp-verify`,{
         phone_number:phoneNumber,
@@ -22,6 +26,10 @@ export const resentOTP=async(phoneNumber)=>{
     const res=await axios.post(`${api}/amarschool/frontend/user-otp-resent`,{
         phone_number:phoneNumber
     })
+    return res
+}
+export const sendOTP=async(phoneNumber,otp)=>{
+    const res=await axios.get(`${api}/amarschool/frontend/sendsms?phone=${phoneNumber}&otp=${otp}`)
     return res
 }
 export const logInUser=async(phoneNumber,password)=>{

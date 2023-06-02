@@ -14,6 +14,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider, useSelector } from "react-redux";
 import store from "./functions/store";
+import * as Updates from 'expo-updates';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -34,6 +35,22 @@ export default function App() {
   const goBack = () => {
     setCheck(null);
   };
+  useEffect(()=>{
+    update()
+  },[])
+  const update=async()=>{
+    try {
+      const update = await Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        await Updates.fetchUpdateAsync();
+        // ... notify user of update ...
+        await Updates.reloadAsync();
+      }
+    } catch (e) {
+      // handle or log error
+      console.error(e.message)
+    }
+  }
   return (
     <Provider store={store}>
       <SafeAreaView style={{ flex: 1 }}>

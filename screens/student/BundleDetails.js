@@ -108,15 +108,17 @@ const BundleDetails = ({ navigation, route }) => {
               color="black"
             />
           </View>
-          <View>
-            <Text>Course Level</Text>
-            <Text>Student Enrolled</Text>
-          </View>
+          
         </View> */}
-        {/* <View>
+        <View>
+            
+            <Text>Student Enrolled</Text>
+            <Text>Course Level</Text>
+          </View>
+        <View>
           <Text>{course?.total_students}</Text>
           <Text>{course?.instructor_average_rating}</Text>
-        </View> */}
+        </View>
       </View>
       <Button
         onPress={() => {
