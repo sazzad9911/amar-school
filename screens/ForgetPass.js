@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View,SafeAreaView,TextInput,TouchableOpacity,KeyboardAvoidingView,Platform, ScrollView, Alert } from 'react-native'
 import React from 'react'
 import Button from '../components/main/Button'
-import { forgetPasswordVerification } from '../apis/auth'
+import { forgetPasswordVerification, sendOTP } from '../apis/auth'
 
 const ForgetPass = ({navigation}) => {
   const [PhoneNumber,setPhoneNumber]=React.useState()
+  
   return (
     <KeyboardAvoidingView
     style={{ flex: 1 }}
@@ -54,9 +55,17 @@ const ForgetPass = ({navigation}) => {
           />
           <Button
           onPress={() => {
-            forgetPasswordVerification(PhoneNumber,"12345678").then(res=>{
+            var OTP = Math.floor(1000 + Math.random() * 9000);
+            // sendOTP(PhoneNumber,OTP).then(res=>{
+              
+            //   navigation.navigate("ResetPass",{otp:OTP})
+            // }).catch(e=>{
+              
+            //   Alert.alert("Ops!",e.response.data.message)
+            // }) 
+            forgetPasswordVerification(PhoneNumber,OTP).then(res=>{
               //console.log(res.data)
-              navigation.navigate("ResetPass")
+              navigation.navigate("ResetPass",{otp:OTP,phoneNumber:PhoneNumber})
             }).catch(err=>{
               Alert.alert("Ops!",err.response.data.message)
             })

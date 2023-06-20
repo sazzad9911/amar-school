@@ -14,10 +14,13 @@ import React from "react";
 import Button from "../components/main/Button";
 import { resetPassword } from "../apis/auth";
 
-const ResetPass = ({ navigation }) => {
+const ResetPass = ({ navigation,route }) => {
   const [verificationCode, setVerificationCode] = React.useState();
   const [Password, setPassword] = React.useState();
   const [ConfirmPassword, setConfirmPassword] = React.useState();
+  const otp=route?.params?.otp;
+  const phoneNumber=route?.params?.phoneNumber
+  //console.log(otp)
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -132,12 +135,22 @@ const ResetPass = ({ navigation }) => {
               Alert.alert("Ops!", "All field are required");
               return;
             }
-            resetPassword(verificationCode, Password, ConfirmPassword)
+            if(otp!=verificationCode){
+              Alert.alert("Ops!", "Otp is invalid");
+              return;
+            }
+            if(Password!=ConfirmPassword){
+              Alert.alert("Ops!", "Password not  matched");
+              return;
+            }
+            console.log(phoneNumber)
+            resetPassword(verificationCode, Password, ConfirmPassword,phoneNumber)
               .then((res) => {
                 console.log(res.data)
                 navigation.navigate("LogIn");
               })
               .catch((err) => {
+                console.log(err.response.data)
                 Alert.alert("Ops!", err.response.data.message);
               });
           }}

@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../components/main/Button";
 
 const ForgetPassword = ({navigation}) => {
+  
   return (
     <View style={{ paddingHorizontal: 20 }}>
       <Text style={{fontSize:18,fontWeight:'500',}}>Forgot Password?</Text>

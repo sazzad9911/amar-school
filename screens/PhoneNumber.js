@@ -103,7 +103,7 @@ function PhoneNumber(props) {
             }).catch(e=>{
               setLoader(false)
               Alert.alert("Ops!",e.response.data.message)
-            })
+            }) 
             
             // props.navigation.navigate("PersonalInfo",{PhoneNumber:PhoneNumber});
             // return

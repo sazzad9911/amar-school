@@ -45,18 +45,11 @@ export const getUserInfo=async(token)=>{
     })
     return res
 }
-export const forgetPasswordVerification=async(phoneNumber,password)=>{
-    const res=await axios.post(`${api}/amarschool/frontend/user-forget-password`,{
-        phone_number:phoneNumber,
-        password:password
-    })
+export const forgetPasswordVerification=async(phoneNumber,otp)=>{
+    const res=await axios.get(`${api}/amarschool/frontend/forget-otp-send?phone_number=${phoneNumber}&otp=${otp}`)
     return res
 }
-export const resetPassword=async(verificationCode,password,passwordConfirmation)=>{
-    const res=await axios.post(`${api}/amarschool/frontend/user-reset-password`,{
-        verification_code:verificationCode,
-        password:password,
-        password_confirmation:passwordConfirmation
-    })
+export const resetPassword=async(verificationCode,password,passwordConfirmation,phoneNumber)=>{
+    const res=await axios.get(`${api}amarschool/frontend/set-new-password?phone_number=${phoneNumber}&password=${password}&password_confirmation=${passwordConfirmation}`)
     return res
 }
